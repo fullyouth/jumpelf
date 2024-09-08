@@ -1,4 +1,11 @@
-let mappings = {};
+let mappings = {
+  // 'aaa': {
+  //   url: '1111'
+  // },
+  // 'aaa1': {
+  //   url: '1111111'
+  // }
+};
 
 function displayMappings() {
   const mappingsDisplay = document.getElementById('mappings-display');
@@ -39,10 +46,11 @@ function displayMappings() {
     `
     mappingsDisplay.appendChild(transStr2Html(_html));
 
-    document.querySelector('.deleteCommand').addEventListener('click', (e) => {
-      let command = e.target.dataset?.command
-      deleteMapping(command)
-    });
+    document.querySelectorAll('.deleteCommand').forEach(ele => {
+      ele.addEventListener('click', (e) => {
+        clickDelete(e)
+      })
+    })
 }
 
 function addMapping() {
@@ -55,6 +63,7 @@ function addMapping() {
     chrome.storage.sync.set({ mappings: mappings }, function() {
       console.log('Mapping added.');
       displayMappings();
+      clearForm()
     });
   }
 }
@@ -66,6 +75,20 @@ function deleteMapping(command) {
     displayMappings();
   });
 }
+
+function clearForm() {
+  document.getElementById('command').value = '';
+  document.getElementById('url').value = '';
+}
+
+function clickDelete(e) {
+  let command = e.target.dataset?.command
+  console.log('delete cmd', command)
+  deleteMapping(command)
+}
+
+// test
+// displayMappings()
 
 document.getElementById('add-mapping').addEventListener('click', addMapping);
 
