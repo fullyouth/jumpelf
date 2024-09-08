@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>跳转精灵</title>
+  <link href="layui.css" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <p class="title">跳转精灵</p>
+
+  <div class="layui-form">
+    <div class="layui-form-item">
+      <div class="layui-input-group">
+        <div class="layui-input-split layui-input-prefix">
+          命令
+        </div>
+        <input id="command" type="text" placeholder="" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-group">
+        <div class="layui-input-split layui-input-prefix">
+          url
+        </div>
+        <input id="url" type="text" placeholder="" class="layui-input">
+      </div>
+    </div>
+  </div>
+  <button id="add-mapping" class="layui-btn">添加</button>
+
+  <div id="mappings-display"></div>
+</body>
+<script src="popup.js"></script>
+
+</html>

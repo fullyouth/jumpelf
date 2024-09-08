@@ -1,0 +1,13 @@
+.layui-input-group{
+  width: 500px;
+}
+
+body{
+  padding: 20px;
+}
+
+.title{
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
