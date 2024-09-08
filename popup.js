@@ -1,11 +1,4 @@
-let mappings = {
-  // 'aaa': {
-  //   url: '1111'
-  // },
-  // 'aaa1': {
-  //   url: '1111111'
-  // }
-};
+let mappings = {};
 
 function displayMappings() {
   const mappingsDisplay = document.getElementById('mappings-display');
@@ -53,9 +46,9 @@ function displayMappings() {
     })
 }
 
-function addMapping() {
-  const command = document.getElementById('command').value;
-  const url = document.getElementById('url').value;
+function addMapping(obj) {
+  const command = obj?.key || document.getElementById('command').value;
+  const url = obj?.value || document.getElementById('url').value;
   if (command && url) {
     mappings[command] = {
       url
@@ -93,8 +86,16 @@ function clickDelete(e) {
 document.getElementById('add-mapping').addEventListener('click', addMapping);
 
 chrome.storage.sync.get(['mappings'], function(result) {
-  mappings = result.mappings || {};
-  displayMappings();
+  mappings = result.mappings
+  if (mappings && Object.keys(mappings)?.length > 0) {
+    displayMappings();
+  } else {
+    // 设置默认值
+    addMapping({
+      key: '/open/baidu',
+      value: 'https://www.baidu.com/'
+    })
+  }
 });
 
 function transStr2Html(_html) {

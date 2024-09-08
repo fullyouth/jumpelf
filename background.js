@@ -21,28 +21,28 @@ function mappingStrategy(result, browserUrl) {
   const mappings = result.mappings || {};
   // 使用path可以防止死循环，一直redirect
   let [path] = browserUrl.split(',')
-  if (!browserUrl.startsWith('file:///open')) {
+  if (browserUrl.startsWith('file:///open') || browserUrl.startsWith('file:///op')) {
+    let params = {}
+    try {
+      params = getUrlParams(browserUrl)
+    } catch (error) {}
+    console.log('params====', params)
+
+    let item = {}
+    for (const command in mappings) {
+      if (path.includes(command)) {
+        item = mappings[command]
+        break;
+      }
+    }
+
+    if (item.url) {
+      item.url = buildUrl(item.url, params)
+    }
+    return item
+  } else {
     return {}
   }
-
-  let params = {}
-  try {
-    params = getUrlParams(browserUrl)
-  } catch (error) {}
-  console.log('params====', params)
-
-  let item = {}
-  for (const command in mappings) {
-    if (path.includes(command)) {
-      item = mappings[command]
-      break;
-    }
-  }
-
-  if (item.url) {
-    item.url = buildUrl(item.url, params)
-  }
-  return item
 }
 
 function getUrlParams(url) {
