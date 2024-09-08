@@ -5,11 +5,11 @@
 通过在浏览器搜索框输入命令，执行跳转对应url的功能
 
 如：
-- 搜索框输入`open/signin`,就跳转签到页
-- 搜索框输入`open/task`,就跳转任务系统后台
-- 搜索框输入`open/task?taskid=123`,跳转任务系统任务id123的详情页
-- 搜索框输入`open/legao/comp`,跳转乐高系统组件配置
-- 搜索框输入`open/legao/page`,跳转乐高系统页面配置
+- 搜索框输入`/open/signin`,就跳转签到页
+- 搜索框输入`/open/task`,就跳转任务系统后台
+- 搜索框输入`/open/task?taskid=123`,跳转任务系统任务id123的详情页
+- 搜索框输入`/open/legao/comp`,跳转乐高系统组件配置
+- 搜索框输入`/open/legao/page`,跳转乐高系统页面配置
 
 ## 如何快速安装
 1、谷歌进入`chrome://extensions/`  
@@ -18,10 +18,10 @@
 
 
 ## 如何映射
-`open/signin` 直接跳转url
-`open/task?taskid=123` 跳转`${url}?taskid=123`
+`/open/signin` 直接跳转url
+`/open/task?taskid=123` 跳转`${url}?taskid=123`
 
-命令一般约定使用open开头，分割线使用'/'
+命令约定使用`/open`开头，分割线使用'/'
 
 ## 为什么需要这个插件
 通过自己的配置，快速打开网站。  

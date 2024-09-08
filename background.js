@@ -4,9 +4,11 @@ chrome.webNavigation.onBeforeNavigate.addListener(function (details) {
     console.log('配置的映射---->', result)
     console.log('浏览器搜索框中的url----->', browserUrl)
     const currentItem = mappingStrategy(result, browserUrl)
-    chrome.tabs.update(details.tabId, {
-      url: currentItem.url
-    });
+    if (currentItem.url) {
+      chrome.tabs.update(details.tabId, {
+        url: currentItem.url
+      });
+    }
   });
 });
 
@@ -17,6 +19,10 @@ chrome.webNavigation.onBeforeNavigate.addListener(function (details) {
  */
 function mappingStrategy(result, browserUrl) {
   const mappings = result.mappings || {};
+  if (!browserUrl.startsWith('file:///open')) {
+    return {}
+  }
+
   let params = {}
   try {
     params = getUrlParams(browserUrl)
