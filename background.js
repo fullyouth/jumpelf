@@ -19,6 +19,8 @@ chrome.webNavigation.onBeforeNavigate.addListener(function (details) {
  */
 function mappingStrategy(result, browserUrl) {
   const mappings = result.mappings || {};
+  // 使用path可以防止死循环，一直redirect
+  let [path] = browserUrl.split(',')
   if (!browserUrl.startsWith('file:///open')) {
     return {}
   }
@@ -31,7 +33,7 @@ function mappingStrategy(result, browserUrl) {
 
   let item = {}
   for (const command in mappings) {
-    if (browserUrl.includes(command)) {
+    if (path.includes(command)) {
       item = mappings[command]
       break;
     }
