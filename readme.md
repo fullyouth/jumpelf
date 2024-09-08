@@ -18,8 +18,8 @@
 
 
 ## 如何映射
-`/open/signin` 直接跳转url
-`/open/task?taskid=123` 跳转`${url}?taskid=123`
+`/open/signin` 直接跳转url  
+`/open/task?taskid=123` 跳转`${url}?taskid=123`  
 
 命令约定使用`/open`开头，分割线使用'/'
 
