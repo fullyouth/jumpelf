@@ -21,7 +21,7 @@ function mappingStrategy(result, browserUrl) {
   const mappings = result.mappings || {};
   // 使用path可以防止死循环，一直redirect
   let [path] = browserUrl.split(',')
-  if (browserUrl.startsWith('file:///open') || browserUrl.startsWith('file:///op')) {
+  if (1 || browserUrl.startsWith('file:///open') || browserUrl.startsWith('file:///op')) {
     let params = {}
     try {
       params = getUrlParams(browserUrl)
@@ -36,9 +36,10 @@ function mappingStrategy(result, browserUrl) {
       }
     }
 
-    if (item.url) {
-      item.url = buildUrl(item.url, params)
-    }
+    // TODO: 暂时去掉url参数的拼接
+    // if (item.url) {
+    //   item.url = buildUrl(item.url, params)
+    // }
     return item
   } else {
     return {}
