@@ -50,6 +50,10 @@ function addMapping(obj) {
   const command = obj?.key || document.getElementById('command').value;
   const url = obj?.value || document.getElementById('url').value;
   if (command && url) {
+    if (url.includes(command)) {
+        alert('URL 不能包含（includes）命令,不然会导致死循环');
+        return;
+    }
     mappings[command] = {
       url
     };
@@ -85,16 +89,22 @@ function clickDelete(e) {
 
 document.getElementById('add-mapping').addEventListener('click', addMapping);
 
+// 获取当前页面 URL 并填入输入框
+chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    const currentUrl = tabs[0].url;
+    document.getElementById('url').value = currentUrl;
+});
+
 chrome.storage.sync.get(['mappings'], function(result) {
-  mappings = result.mappings
+  mappings = result.mappings || {}
   if (mappings && Object.keys(mappings)?.length > 0) {
     displayMappings();
   } else {
     // 设置默认值
-    addMapping({
-      key: '/open/baidu',
-      value: 'https://www.baidu.com/'
-    })
+    // addMapping({
+    //   key: '/open/baidu',
+    //   value: 'https://www.baidu.com/'
+    // })
   }
 });
 
