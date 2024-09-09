@@ -12,6 +12,7 @@
   },
   "permissions": [
     "storage",
-    "webNavigation"
+    "webNavigation",
+    "tabs"
   ]
 }
